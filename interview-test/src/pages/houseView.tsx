@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { getHouseByName } from '../service/apiService';
+import Spinner from '../pages/spinner'; 
 
 interface HouseViewProps {
     searchTerm: string;
   }
 export default function HouseView({ searchTerm }: HouseViewProps): JSX.Element {
     const [searchResults, setSearchResults] = useState<string[]>([]);
+    const [loading, setLoading] = useState(false);
     console.log('Search results state:', searchTerm);
+    
     
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             if (searchTerm) {
                 try {
                     const result = await getHouseByName(searchTerm);
@@ -22,7 +26,8 @@ export default function HouseView({ searchTerm }: HouseViewProps): JSX.Element {
                     console.error('Error:', error);
                 }
             } else {
-                setSearchResults([]);                
+                setSearchResults([]); 
+                setLoading(false);               
             }
         };
         fetchData();
@@ -46,10 +51,13 @@ export default function HouseView({ searchTerm }: HouseViewProps): JSX.Element {
 
         return false;
     }
-
+    
     return (
+
+
         <div>
-            {searchResults.length > 0 && (
+            
+            {searchResults.length > 0 &&  (
                 <div>
                     <h2>Matching Houses</h2>
                     {searchResults.map((house: any) => {
@@ -76,6 +84,9 @@ export default function HouseView({ searchTerm }: HouseViewProps): JSX.Element {
                     })}
                 </div>
             )}
+                                {loading && searchResults.length === 0 && <Spinner />}{!loading && searchResults.length === 0 && <div>No matching houses found</div>}
+
         </div>
+        
     );
 }

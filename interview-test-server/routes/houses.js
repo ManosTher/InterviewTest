@@ -29,6 +29,20 @@ const getHouseByName = async (req, res) => {
   }
 };
 
+const addHouse = async (req, res) => {
+  try {
+    const data = await fs.readFile(dataFilePath, 'utf8');
+    const houses = JSON.parse(data);
+    const house = req.body;
+    house.id = houses.length + 1;
+    houses.push(house);
+    await fs.writeFile(dataFilePath, JSON.stringify(houses));
+    res.status(201).json(house);
+  } catch (error) {
+    res.status(500).json({ message: "Error writing data" });
+  }
+};
+
 /*
 const getHouseById = async (req, res) => {
   try {
@@ -47,19 +61,6 @@ const getHouseById = async (req, res) => {
   }
 };
 
-const createHouse = async (req, res) => {
-  try {
-    const data = await fs.readFile(dataFilePath, 'utf8');
-    const houses = JSON.parse(data);
-    const house = req.body;
-    house.id = houses.length + 1;
-    houses.push(house);
-    await fs.writeFile(dataFilePath, JSON.stringify(houses));
-    res.status(201).json(house);
-  } catch (error) {
-    res.status(500).json({ message: "Error writing data" });
-  }
-};
 
 const updateHouse = async (req, res) => {
   try {
@@ -102,8 +103,8 @@ const deleteHouse = async (req, res) => {
 module.exports = {
   getAllHouses,
   getHouseByName,
+  addHouse,
   //getHouseById,
-  //createHouse,
   //updateHouse,
   //deleteHouse
 };

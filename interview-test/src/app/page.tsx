@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import SearchBar from '../pages/searchBar'; // Updated import path for SearchBar
 import HouseView from '../pages/houseView'; // Updated import path for HouseView
 import Card from '../pages/card'; // Updated import path for Card
@@ -30,6 +31,7 @@ export default function Home(): JSX.Element {
         <SearchBar handleInputChange={handleInputChange} /> {/* Pass handleInputChange function to SearchBar */}
         <HouseView searchTerm={searchTerm} /> {/* Pass searchResults to HouseView */}
         {showCard && <Card />} {/* Render the Card component only when showCard is true */}
+        <Link href="/addHouse">Add House</Link>
       </div>
     </div>
   );

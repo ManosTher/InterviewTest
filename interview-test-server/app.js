@@ -5,7 +5,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-
 // Import routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -31,8 +30,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.get('/houses', houseController.getAllHouses);
 app.get('/houses/:name', houseController.getHouseByName);
+app.post('/houses', houseController.addHouse);
 //app.get('/houses/:id', houseController.getHouseById);
-//app.post('/houses', houseController.createHouse);
 //app.put('/houses/:id', houseController.updateHouse);
 //app.delete('/houses/:id', houseController.deleteHouse);
 
