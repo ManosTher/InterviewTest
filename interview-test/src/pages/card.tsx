@@ -56,7 +56,7 @@ export default function Card(): JSX.Element {
         }
 
         return (
-          <div key={house.id} className="border-2 rounded-lg shadow-lg p-4 mb-4 w-1/2">
+          <div key={house.id} className="w-full p-2 border border-gray-300 rounded-md mb-4 shadow-xl">
             <div className="flex justify-between">
               <div className="text-xl font-bold">{house.name}</div>
               <p>{house.animal}</p>

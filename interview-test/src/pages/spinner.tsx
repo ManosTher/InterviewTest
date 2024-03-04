@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface SpinnerProps {
   size?: number;
@@ -6,7 +6,18 @@ interface SpinnerProps {
 }
 
 const Spinner: React.FC<SpinnerProps> = ({ size = 32, color = 'blue' }) => {
-  return (
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  useEffect(() => {
+    setShowSpinner(true);
+    const timeout = setTimeout(() => {
+      setShowSpinner(false);
+    }, 2000); // 2-second duration
+  
+    return () => clearTimeout(timeout); // Clear the timeout when the component unmounts
+  }, []);
+  
+  return showSpinner ? (
     <svg
       width={size}
       height={size}
@@ -17,7 +28,9 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 32, color = 'blue' }) => {
       <g fill="none" fillRule="evenodd">
         <g transform="translate(1 1)" strokeWidth="2">
           <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
-          <path d="M36 18c0-9.94-8.06-18-18-18">
+          <path
+            d="M36 18c0-9.94-8.06-18-18-18"
+          >
             <animateTransform
               attributeName="transform"
               type="rotate"
@@ -30,7 +43,7 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 32, color = 'blue' }) => {
         </g>
       </g>
     </svg>
-  );
+  ) : null;
 };
 
 export default Spinner;

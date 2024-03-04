@@ -15,24 +15,24 @@ export default function Home(): JSX.Element {
   };
 
   useEffect(() => {
-    // Example logic to update searchResults based on searchTerm
     if (searchTerm) {
-      setShowCard(false);
-      console.log('Search results:', searchTerm);
+      setShowCard(false); // Hide the Card component if searchTerm is not empty
     } else {
-      setSearchResults([]); // Clear searchResults if searchTerm is empty
-      setShowCard(true);
+      setShowCard(true); // Show the Card component if searchTerm is empty
     }
+
   }, [searchTerm]);
 
   return (
-    <div className='container flex justify-center items-center'>
-      <div className='w-full justify-center items-center'>
+    <div className='flex justify-center items-center'>
+      <div className='w-full md:w-1/3'>
         <SearchBar handleInputChange={handleInputChange} /> {/* Pass handleInputChange function to SearchBar */}
         <HouseView searchTerm={searchTerm} /> {/* Pass searchResults to HouseView */}
-        {showCard && <Card />} {/* Render the Card component only when showCard is true */}
-        <Link href="/addHouse">Add House</Link>
+        {showCard && <Card />} {/* Display Card component if searchTerm is not empty */}
+
       </div>
     </div>
   );
 }
+
+// <Link href="/addHouse">Add House</Link>
