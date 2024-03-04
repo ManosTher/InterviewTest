@@ -58,12 +58,12 @@ export default function Card(): JSX.Element {
         return (
           <div key={house.id} className="w-full p-2 border border-gray-300 rounded-md mb-4 shadow-xl">
             <div className="flex justify-between">
-              <div className="text-xl font-bold">{house.name}</div>
+              <div className="text-xl font-bold mb-2">{house.name}</div>
               <p>{house.animal}</p>
             </div>
-            <div className="w-25 h-5" style={{ backgroundImage: `linear-gradient(to right, ${gradientColors})` }}></div>
+            <div className="w-25 h-5 mb-2" style={{ backgroundImage: `linear-gradient(to right, ${gradientColors})` }}></div>
             <div className="text-lg">
-              <p>{house.founder}</p>
+            <p>Founder: {house.founder}</p>
             </div>
           </div>
         );
